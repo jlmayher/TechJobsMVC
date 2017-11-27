@@ -2,6 +2,26 @@
 
 <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-@{ 
-    // TODO #3 - Use the same list display from Views/Search/Index.cshtml 
-}
+@{
+// TODO #3 - Use the same list display from Views/Search/Index.cshtml
+    @if (ViewBag.jobs != null)
+    {
+        @foreach (var job in ViewBag.jobs)
+        {
+            <table class="job-listing">
+                @foreach (KeyValuePair<string, string> info in job)
+                {
+                    <tr>
+                        <td>@info.Key</td>
+                        <td>@info.Value</td>
+                    </tr>
+                }
+            </table>
+
+        }
+    }
+    else
+    {
+        < h3 > No jobs matched your search criteria.</ h3 >
+    }
+    }

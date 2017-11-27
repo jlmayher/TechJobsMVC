@@ -13,11 +13,11 @@ namespace TechJobs.Controllers
         // to initialize static members of a class
         static ListController() 
         {
-            
-            columnChoices.Add("core competency", "Skill");
+            columnChoices.Add("name", "Name");
             columnChoices.Add("employer", "Employer");
             columnChoices.Add("location", "Location");
             columnChoices.Add("position type", "Position Type");
+            columnChoices.Add("core competency", "Skill");
             columnChoices.Add("all", "All");
         }
 
@@ -32,6 +32,7 @@ namespace TechJobs.Controllers
             if (column.Equals("all"))
             {
                 List<Dictionary<string, string>> jobs = JobData.FindAll();
+                ViewBag.columns = columnChoices;
                 ViewBag.title =  "All Jobs";
                 ViewBag.jobs = jobs;
                 return View("Jobs");
@@ -48,6 +49,7 @@ namespace TechJobs.Controllers
 
         public IActionResult Jobs(string column, string value)
         {
+            ViewBag.columns = columnChoices;
             List<Dictionary<String, String>> jobs = JobData.FindByColumnAndValue(column, value);
             ViewBag.title = "Jobs with " + columnChoices[column] + ": " + value;
             ViewBag.jobs = jobs;
